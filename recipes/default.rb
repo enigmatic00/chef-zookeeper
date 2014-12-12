@@ -1,6 +1,4 @@
-#
-# Cookbook Name:: zookeeper
-# Recipe:: default
+# recipes/default.rb
 #
 # Copyright 2013, Simple Finance Technology Corp.
 #
@@ -15,7 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-include_recipe "zookeeper::exhibitor"
+# download and install base package
+include_recipe 'zookeeper::install'
 
+# set config path and render config
+include_recipe 'zookeeper::config_render'

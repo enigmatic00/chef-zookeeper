@@ -1,4 +1,4 @@
-# resources/node.rb
+# recipes/config_render.rb
 #
 # Copyright 2013, Simple Finance Technology Corp.
 #
@@ -14,9 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-actions(:create, :delete, :create_if_missing)
-default_action(:create)
+# set the config path based on default attributes
+config_path = ::File.join(node[:zookeeper][:install_dir],
+                          "zookeeper-#{node[:zookeeper][:version]}",
+                          'conf',
+                          'zoo.cfg')
 
-attribute :path,        kind_of: String, name_attribute: true
-attribute :connect_str, kind_of: String, required: true
-attribute :data,        kind_of: String
+# render out our config
+zookeeper_config config_path do
+  config node[:zookeeper][:config]
+  user   node[:zookeeper][:user]
+  action :render
+end
