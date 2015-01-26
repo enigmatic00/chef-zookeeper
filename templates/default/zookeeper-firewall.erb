@@ -1,0 +1,2 @@
+# port <%= node['zookeeper']['config']['clientPort'] %> for zookeeper
+-A FWR -p tcp -m tcp --dport <%= node['zookeeper']['config']['clientPort'] %> -j ACCEPT
